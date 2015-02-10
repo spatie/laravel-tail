@@ -10,12 +10,12 @@ This package brings provides a tail command for Laravel 5. Currently only tailin
 
 ## Install
 
-Via Composer
+You can install the package via composer:
 
 ``` bash
 $ composer require spatie/laravel-tail
 ```
-
+You must install this service provider:
 ```php
 // Laravel 5: config/app.php
 
