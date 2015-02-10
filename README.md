@@ -26,9 +26,14 @@ You must install this service provider:
 ```
 
 ## Usage
-To tail the last log file you can use this command:
+To tail the log you can use this command:
 ``` bash
 php artisan tail
+```
+
+By default the last 20 lines will be shown. You can change that number by using the ```lines```-option.
+``` bash
+php artisan tail --lines=50
 ```
 
 ## Contributing
