@@ -16,7 +16,7 @@ $ composer require spatie/laravel-tail
 ```
 You must install this service provider:
 ```php
-// Laravel 5: config/app.php
+// config/app.php
 
 'providers' => [
     ...
