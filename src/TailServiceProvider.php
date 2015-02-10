@@ -35,6 +35,8 @@ class TailServiceProvider extends ServiceProvider
                 return new TailCommand();
             }
         );
+
+        $this->commands('command.tail');
     }
 
     /**
