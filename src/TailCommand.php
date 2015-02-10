@@ -19,7 +19,7 @@ class TailCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Tail the latest local logfile.';
+    protected $description = 'Tail the latest local logfile';
 
     /**
      * Create a new command instance.

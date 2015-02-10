@@ -5,7 +5,7 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/freekmurze/laravel-tail.svg?style=flat-square)](https://scrutinizer-ci.com/g/freekmurze/laravel-tail)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-tail.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-tail)
 
-This package brings provides a tail command for Laravel 5. Currently only tailing the local logs is supported.
+This package brings provides a tail command for Laravel 5. Currently only tailing the local log is supported.
 
 ## Install
 
