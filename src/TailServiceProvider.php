@@ -3,9 +3,8 @@
 namespace Spatie\Tail;
 
 use Illuminate\Support\ServiceProvider;
-use Spatie\Tail\TailCommand;
 
-class IdeHelperServiceProvider extends ServiceProvider
+class TailServiceProvider extends ServiceProvider
 {
 
     /**
@@ -22,7 +21,6 @@ class IdeHelperServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
     }
 
     /**
@@ -32,16 +30,14 @@ class IdeHelperServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $configPath = __DIR__ . '/../config/ide-helper.php';
+        $configPath = __DIR__.'/../config/ide-helper.php';
         $this->mergeConfigFrom($configPath, 'ide-helper');
-        
+
         $this->app['command.tail'] = $this->app->share(
             function ($app) {
                 return new TailCommand();
             }
         );
-
-
     }
 
     /**
@@ -53,5 +49,4 @@ class IdeHelperServiceProvider extends ServiceProvider
     {
         return ['command.tail'];
     }
-
 }
