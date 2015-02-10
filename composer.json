@@ -1,0 +1,30 @@
+{
+    "name": "spatie/laravel-tail",
+    "description": "The missing tail command for Laravel 5",
+    "keywords": [
+        "laravel 5",
+        "tail",
+        "log",
+        "laravel-tail"
+    ],
+    "homepage": "https://github.com/freekmurze/laravel-tail",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Freek Van der Herten",
+            "email": "freek@spatie.be",
+            "homepage": "https://murze.be",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : ">=5.4.0"
+        "illuminate/support": "5.0.x",
+        "illuminate/console": "5.0.x",
+    },
+    "autoload": {
+        "psr-4": {
+            "Spatie\\Tail": "src"
+        }
+    }
+}
