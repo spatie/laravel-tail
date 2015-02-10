@@ -16,13 +16,21 @@ Via Composer
 $ composer require spatie/laravel-tail
 ```
 
-## Usage
+```php
+// Laravel 5: config/app.php
 
+'providers' => [
+    ...
+    'Spatie\Tail\TailServiceProvider',
+    ...
+];
+```
+
+## Usage
+To tail the last log file you can use this command:
 ``` bash
 php artisan tail
 ```
-
-## Testing
 
 ## Contributing
 
