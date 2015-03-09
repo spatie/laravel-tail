@@ -28,7 +28,7 @@ If you're planning on tailing remote logs you must publish the config file with 
 ``` bash
 php artisan vendor:publish --provider="Spatie\Tail\TailServiceProvider"
 ```
-A file named ```tail.php`` will be created in the config directory. The options you can set in the file should be self-explanatory.
+A file named ``tail.php`` will be created in the config directory. The options you can set in the file should be self-explanatory.
 ```php
 
 return [
