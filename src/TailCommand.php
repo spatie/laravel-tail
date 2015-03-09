@@ -1,7 +1,7 @@
 <?php namespace Spatie\Tail;
 
-use Illuminate\Filesystem\Filesystem;
-use Spatie\Tail\Remote\SecLibGateway;
+use Exception;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Process\Process;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -39,15 +39,63 @@ class TailCommand extends Command
      */
     public function fire()
     {
-        if (is_null($this->argument('connection')))
-        {
+        if (is_null($this->argument('connection'))) {
             $this->tailLocalLogFile();
-        }
-        else
-        {
+        } else {
             $this->tailRemoteLogFile($this->argument('connection'));
         }
+    }
 
+    /**
+     * Tail the latest local log file
+     *
+     * @return null|string
+     */
+    private function tailLocalLogFile()
+    {
+        $path = $this->findNewestLocalLogfile();
+
+        $lines = $this->option('lines');
+
+        $this->info('start tailing '.$path);
+
+        $tailCommand = 'tail -f -n '.$lines.' '.escapeshellarg($path);
+
+        $this->executeCommand($tailCommand);
+
+        return $path;
+    }
+
+    /**
+     * Tail the latest remote log file for the given connection
+     *
+     * @param string $connection
+     */
+    protected function tailRemoteLogFile($connection)
+    {
+        $connectionParameters = config('tail.connections.'.$connection);
+
+        $this->guardAgainstInvalidConnectionParameters($connectionParameters);
+
+        $tailCommand = "ssh ".($connectionParameters['user'] == '' ? '' : $connectionParameters['user'] . '@').$connectionParameters['host']." -T 'cd ".$connectionParameters['logDirectory'].";tail -n ".$this->option('lines')." -f $(ls -t | head -n 1)'";
+
+        $this->info('start tailing latest remote log on host '.$connectionParameters['host'].' in directory '.$connectionParameters['logDirectory']);
+
+        $this->executeCommand($tailCommand);
+    }
+
+    /**
+     * Execute the given command
+     *
+     * @param string $command
+     */
+    protected function executeCommand($command)
+    {
+        $output = $this->output;
+
+        (new Process($command))->setTimeout(null)->run(function ($type, $line) use ($output) {
+            $output->write($line);
+        });
     }
 
     /**
@@ -55,7 +103,7 @@ class TailCommand extends Command
      *
      * @return null|string
      */
-    private function findNewestLocalLogfile()
+    protected function findNewestLocalLogfile()
     {
         $files = glob(storage_path('logs')."/*.log");
         $files = array_combine($files, array_map("filemtime", $files));
@@ -63,24 +111,6 @@ class TailCommand extends Command
         $newestLogFile = key($files);
 
         return $newestLogFile;
-    }
-
-    /**
-     * Tail a local log file for the application.
-     *
-     * @param $path
-     */
-    public function tailLocalLog($path)
-    {
-        $output = $this->output;
-
-        $lines = $this->option('lines');
-
-        $this->info('start tailing '.$path);
-
-        (new Process('tail -f -n '.$lines.' '.escapeshellarg($path)))->setTimeout(null)->run(function ($type, $line) use ($output) {
-            $output->write($line);
-        });
     }
 
     /**
@@ -108,22 +138,21 @@ class TailCommand extends Command
     }
 
     /**
-     * @return null|string
+     * Guard againt invalid connectionParameters
+     *
+     * @param $connectionParameters
+     * @throws Exception
      */
-    private function tailLocalLogFile()
+    protected function guardAgainstInvalidConnectionParameters($connectionParameters)
     {
-        $path = $this->findNewestLocalLogfile();
+        if ($connectionParameters['host'] == '')
+        {
+            throw new Exception('Hostname is required');
+        }
 
-        $this->tailLocalLog($path);
-        return $path;
-    }
-
-    protected function tailRemoteLogFile($connection)
-    {
-        $connectionParameters = config('tail.' . $connection);
-        
-        $connection = new SecLibGateway($connectionParameters['host'], ['username' => $connectionParameters['username']], new Filesystem());
-        $connection->run('ls');
-
+        if ($connectionParameters['logDirectory'] == '')
+        {
+            throw new Exception('LogDirectory is required');
+        }
     }
 }
