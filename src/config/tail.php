@@ -12,17 +12,17 @@ return [
             /*
              * The hostname of the server where the logs are located
              */
-            'host'          => '',
+            'host'  => '',
 
             /*
              * The username to be used when connecting to the server where the logs are located
              */
-            'username'      => '',
+            'username' => '',
 
             /*
              * The full path to the directory where the logs are located
              */
-            'logDirectory'  => '',
+            'logDirectory' => '',
         ],
     ],
 ];

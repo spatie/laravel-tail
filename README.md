@@ -28,8 +28,10 @@ If you're planning on tailing remote logs you must publish the config file with 
 ``` bash
 php artisan vendor:publish --provider="Spatie\Tail\TailServiceProvider"
 ```
-A file named tail.php will be created in the config directory. The options you can set in the file should be self-explanatory.
+A file named ```tail.php`` will be created in the config directory. The options you can set in the file should be self-explanatory.
 ```php
+
+return [
 
 return [
 
@@ -43,22 +45,20 @@ return [
             /*
              * The hostname of the server where the logs are located
              */
-            'host'          => '',
+            'host'  => '',
 
             /*
              * The username to be used when connecting to the server where the logs are located
              */
-            'username'      => '',
+            'username' => '',
 
             /*
              * The full path to the directory where the logs are located
              */
-            'logDirectory'  => '',
+            'logDirectory' => '',
         ],
     ],
 ];
-
-
 
 ```
 
