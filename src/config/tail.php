@@ -4,14 +4,18 @@ return [
 
     'connections' => [
 
+        /*
+         * The environment name. You can use this value in the tail command.
+         */
         'production' => [
+
             /*
              * The hostname of the server where the logs are located
              */
             'host'          => '',
 
             /*
-             * The username to connect to the server where the logs are located
+             * The username to be used when connecting to the server where the logs are located
              */
             'username'      => '',
 
