@@ -21,6 +21,10 @@ class TailServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->publishes([
+            __DIR__.'/../../config/tail.php' => config_path('tail.php'),
+        ], 'config');
+
     }
 
     /**

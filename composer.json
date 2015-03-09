@@ -19,8 +19,10 @@
     ],
     "require": {
         "php" : ">=5.4.0",
-        "illuminate/support": "5.0.x",
-        "illuminate/console": "5.0.x"
+        "illuminate/support": "~5.0",
+        "illuminate/console": "~5.0",
+        "illuminate/filesystem": "~5.0",
+        "phpseclib/phpseclib": "0.3.*"
     },
     "autoload": {
         "psr-4": {

@@ -1,5 +1,7 @@
 <?php namespace Spatie\Tail;
 
+use Illuminate\Filesystem\Filesystem;
+use Spatie\Tail\Remote\SecLibGateway;
 use Symfony\Component\Process\Process;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -37,15 +39,15 @@ class TailCommand extends Command
      */
     public function fire()
     {
-        $path = $this->findNewestLocalLogfile();
-
-        if (! $path) {
-            $this->error('Aborting: could not find a log file');
-
-            return;
+        if (is_null($this->argument('connection')))
+        {
+            $this->tailLocalLogFile();
+        }
+        else
+        {
+            $this->tailRemoteLogFile($this->argument('connection'));
         }
 
-        $this->tailLocalLog($path);
     }
 
     /**
@@ -91,5 +93,37 @@ class TailCommand extends Command
         return [
             ['lines', null, InputOption::VALUE_OPTIONAL, 'The number of lines to tail.', 20],
         ];
+    }
+
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return array(
+            array('connection', InputArgument::OPTIONAL, 'The remote connection name'),
+        );
+    }
+
+    /**
+     * @return null|string
+     */
+    private function tailLocalLogFile()
+    {
+        $path = $this->findNewestLocalLogfile();
+
+        $this->tailLocalLog($path);
+        return $path;
+    }
+
+    protected function tailRemoteLogFile($connection)
+    {
+        $connectionParameters = config('tail.' . $connection);
+        
+        $connection = new SecLibGateway($connectionParameters['host'], ['username' => $connectionParameters['username']], new Filesystem());
+        $connection->run('ls');
+
     }
 }
