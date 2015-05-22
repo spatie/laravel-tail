@@ -7,7 +7,7 @@
         "log",
         "laravel-tail"
     ],
-    "homepage": "https://github.com/freekmurze/laravel-tail",
+    "homepage": "https://github.com/spatie/laravel-tail",
     "license": "MIT",
     "authors": [
         {
