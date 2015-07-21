@@ -7,6 +7,8 @@
 
 This package brings provides a tail command for Laravel 5. This package works for daily and single logs and has support for tailing local and the remote logs.
 
+Spatie is webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
+
 ## Install
 
 You can install the package via composer:
@@ -83,9 +85,6 @@ To tail a remote log you must first specify ```hostname``` and ```logDirectory``
 php artisan tail production
 ```
 
-
-
-
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
@@ -98,6 +97,9 @@ If you discover any security related issues, please email freek@spatie.be instea
 
 - [Freek Van der Herten](https://github.com/freekmurze)
 - [All Contributors](../../contributors)
+
+## About Spatie
+Spatie is webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource). 
 
 ## License
 
