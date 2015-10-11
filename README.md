@@ -53,7 +53,7 @@ return [
              * The username to be used when connecting to the server where the 
              * logs are located
              */
-            'username' => '',
+            'user' => '',
 
             /*
              * The full path to the directory where the logs are located
