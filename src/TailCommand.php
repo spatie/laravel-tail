@@ -1,4 +1,6 @@
-<?php namespace Spatie\Tail;
+<?php
+
+namespace Spatie\Tail;
 
 use Exception;
 use Symfony\Component\Console\Input\InputArgument;
@@ -8,7 +10,6 @@ use Symfony\Component\Console\Input\InputOption;
 
 class TailCommand extends Command
 {
-
     /**
      * The console command name.
      *
@@ -25,7 +26,6 @@ class TailCommand extends Command
 
     /**
      * Create a new command instance.
-     *
      */
     public function __construct()
     {
@@ -47,7 +47,7 @@ class TailCommand extends Command
     }
 
     /**
-     * Tail the latest local log file
+     * Tail the latest local log file.
      *
      * @return null|string
      */
@@ -67,7 +67,7 @@ class TailCommand extends Command
     }
 
     /**
-     * Tail the latest remote log file for the given connection
+     * Tail the latest remote log file for the given connection.
      *
      * @param string $connection
      */
@@ -77,7 +77,7 @@ class TailCommand extends Command
 
         $this->guardAgainstInvalidConnectionParameters($connectionParameters);
 
-        $tailCommand = "ssh ".($connectionParameters['user'] == '' ? '' : $connectionParameters['user'] . '@').$connectionParameters['host']." -T 'cd ".$connectionParameters['logDirectory'].";tail -n ".$this->option('lines')." -f $(ls -t | head -n 1)'";
+        $tailCommand = 'ssh '.($connectionParameters['user'] == '' ? '' : $connectionParameters['user'].'@').$connectionParameters['host']." -T 'cd ".$connectionParameters['logDirectory'].';tail -n '.$this->option('lines')." -f $(ls -t | head -n 1)'";
 
         $this->info('start tailing latest remote log on host '.$connectionParameters['host'].' in directory '.$connectionParameters['logDirectory']);
 
@@ -85,7 +85,7 @@ class TailCommand extends Command
     }
 
     /**
-     * Execute the given command
+     * Execute the given command.
      *
      * @param string $command
      */
@@ -105,8 +105,8 @@ class TailCommand extends Command
      */
     protected function findNewestLocalLogfile()
     {
-        $files = glob(storage_path('logs')."/*.log");
-        $files = array_combine($files, array_map("filemtime", $files));
+        $files = glob(storage_path('logs').'/*.log');
+        $files = array_combine($files, array_map('filemtime', $files));
         arsort($files);
         $newestLogFile = key($files);
 
@@ -132,26 +132,24 @@ class TailCommand extends Command
      */
     protected function getArguments()
     {
-        return array(
-            array('connection', InputArgument::OPTIONAL, 'The remote connection name'),
-        );
+        return [
+            ['connection', InputArgument::OPTIONAL, 'The remote connection name'],
+        ];
     }
 
     /**
-     * Guard againt invalid connectionParameters
+     * Guard againt invalid connectionParameters.
      *
      * @param $connectionParameters
      * @throws Exception
      */
     protected function guardAgainstInvalidConnectionParameters($connectionParameters)
     {
-        if ($connectionParameters['host'] == '')
-        {
+        if ($connectionParameters['host'] == '') {
             throw new Exception('Hostname is required');
         }
 
-        if ($connectionParameters['logDirectory'] == '')
-        {
+        if ($connectionParameters['logDirectory'] == '') {
             throw new Exception('LogDirectory is required');
         }
     }
