@@ -2,6 +2,9 @@
 
 All Notable changes to laravel-tail will be documented in this file
 
+### 1.1.3 - 2016-11-26
+- Cleanup
+
 ### 1.1.2
 - Fix config file
 
