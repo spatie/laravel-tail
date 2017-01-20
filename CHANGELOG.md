@@ -2,7 +2,12 @@
 
 All Notable changes to laravel-tail will be documented in this file
 
+### 1.1.5
+- Remove L5.4 compatibility
+
 ### 1.1.4
+**THIS RELEASE CONTAINS BUGS, DO NOT USE**
+
 - Make compatible with Laravel 5.4
 
 ### 1.1.3 - 2016-11-26
