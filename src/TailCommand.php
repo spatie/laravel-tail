@@ -3,10 +3,10 @@
 namespace Spatie\Tail;
 
 use Exception;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Process\Process;
 use Illuminate\Console\Command;
+use Symfony\Component\Process\Process;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 
 class TailCommand extends Command
 {
