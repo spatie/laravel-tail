@@ -6,7 +6,7 @@
 [![StyleCI](https://styleci.io/repos/30608411/shield?branch=master)](https://styleci.io/repos/30608411)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-tail.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-tail)
 
-This package brings back the tail command in Laravel 5. This package works for daily and single logs and has support for tailing local and the remote logs.
+This package offers an Artisan command to tail the application log. It supports daily and single logs and tailing both local and remote logs.
 
 Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
