@@ -1,6 +1,6 @@
 # Changelog
 
-All Notable changes to laravel-tail will be documented in this file
+All notable changes to laravel-tail will be documented in this file
 
 ### 1.2.0
 - Make compatible with Laravel 5.4, drop support for all older versions
