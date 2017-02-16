@@ -31,7 +31,7 @@ You must install this service provider:
 
 'providers' => [
     ...
-    'Spatie\Tail\TailServiceProvider',
+    Spatie\Tail\TailServiceProvider::class,
     ...
 ];
 ```
