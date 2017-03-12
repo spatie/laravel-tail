@@ -121,7 +121,7 @@ class TailCommand extends Command
     protected function getOptions()
     {
         return [
-            ['lines', null, InputOption::VALUE_OPTIONAL, 'The number of lines to tail.', 20],
+            ['lines', 'L', InputOption::VALUE_OPTIONAL, 'The number of lines to tail.', 20],
         ];
     }
 
