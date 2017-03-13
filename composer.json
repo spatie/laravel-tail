@@ -2,7 +2,7 @@
     "name": "spatie/laravel-tail",
     "description": "Easily tail the application log in Laravel applications",
     "keywords": [
-        "laravel 5",
+        "laravel",
         "tail",
         "log",
         "laravel-tail"

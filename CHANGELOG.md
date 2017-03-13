@@ -2,6 +2,9 @@
 
 All notable changes to laravel-tail will be documented in this file
 
+### 1.3.0 - 2016-03-13
+- add `-l` option
+
 ### 1.2.0
 - Make compatible with Laravel 5.4, drop support for all older versions
 
