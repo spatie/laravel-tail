@@ -25,7 +25,9 @@ You can install the package via composer:
 ``` bash
 composer require spatie/laravel-tail
 ```
+
 You must install this service provider:
+
 ```php
 // config/app.php
 
@@ -37,15 +39,15 @@ You must install this service provider:
 ```
 
 If you're planning on tailing remote logs you must publish the config file with this command:
-``` bash
+
+```bash
 php artisan vendor:publish --provider="Spatie\Tail\TailServiceProvider"
 ```
-A file named ``tail.php`` will be created in the config directory. The options you can set in the file should be self-explanatory.
+
+A file named `tail.php` will be created in the config directory. The options you can set in the file should be self-explanatory.
+
 ```php
-
 return [
-
-
     'connections' => [
 
         /*
@@ -71,26 +73,31 @@ return [
         ],
     ],
 ];
-
 ```
-
-
 
 ## Usage
 
-
 To tail the local log you can use this command:
-``` bash
+
+```bash
 php artisan tail
 ```
 
-By default the last 20 lines will be shown. You can change that number by using the ```lines```-option.
-``` bash
+By default the last 20 lines will be shown. You can change that number by using the `lines`-option (`l` for short).
+
+```bash
 php artisan tail --lines=50
 ```
 
-To tail a remote log you must first specify ```hostname``` and ```logDirectory``` in the config-file. After you've done that you can tail the remote logs by specifify the environment as an argument.
-``` bash
+or
+
+```bash
+php artisan tail -l 50
+```
+
+To tail a remote log you must first specify `hostname` and `logDirectory` in the config-file. After you've done that you can tail the remote logs by specifify the environment as an argument:
+
+```bash
 php artisan tail production
 ```
 
