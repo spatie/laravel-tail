@@ -74,12 +74,12 @@ class TailCommand extends Command
     protected function tailRemoteLogFile($connection)
     {
         $connectionParameters = config('tail.connections.'.$connection);
-
+        $PORT = @$connectionParameters['port'] ?: 22;
         $this->guardAgainstInvalidConnectionParameters($connectionParameters);
 
-        $tailCommand = 'ssh '.($connectionParameters['user'] == '' ? '' : $connectionParameters['user'].'@').$connectionParameters['host']." -T 'cd ".$connectionParameters['logDirectory'].';tail -n '.$this->option('lines')." -f $(ls -t | head -n 1)'";
+        $tailCommand = 'ssh '.($connectionParameters['user'] == '' ? '' : $connectionParameters['user'].'@').$connectionParameters['host']." -p " . $PORT . " -T 'cd ".$connectionParameters['logDirectory'].';tail -n '.$this->option('lines')." -f $(ls -t | head -n 1)'";
 
-        $this->info('start tailing latest remote log on host '.$connectionParameters['host'].' in directory '.$connectionParameters['logDirectory']);
+        $this->info('start tailing latest remote log on host '.$connectionParameters['host'].' (port '.$PORT.') in directory '.$connectionParameters['logDirectory']);
 
         $this->executeCommand($tailCommand);
     }
