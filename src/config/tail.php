@@ -27,7 +27,7 @@ return [
             /*
              * The port of remote ssh
              */
-            'port' => '22'
+            'port' => '22',
         ],
     ],
 ];
