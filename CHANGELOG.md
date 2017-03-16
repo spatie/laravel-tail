@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to laravel-tail will be documented in this file
+All notable changes to `laravel-tail` will be documented in this file
 
 ### 1.4.0 - 2016-03-16
 - add `port` to config file
