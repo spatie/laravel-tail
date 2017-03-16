@@ -76,12 +76,12 @@ class TailCommand extends Command
         $connectionParameters = config('tail.connections.'.$connection);
 
         if (isset($connectionParameters['port'])) {
-        	$portCommand =  "-p {$connectionParameters['port']}";
+            $portCommand = "-p {$connectionParameters['port']}";
         }
 
         $this->guardAgainstInvalidConnectionParameters($connectionParameters);
 
-        $tailCommand = 'ssh '.($connectionParameters['user'] == '' ? '' : $connectionParameters['user'].'@').$connectionParameters['host']." " . $portCommand . " -T 'cd ".$connectionParameters['logDirectory'].';tail -n '.$this->option('lines')." -f $(ls -t | head -n 1)'";
+        $tailCommand = 'ssh '.($connectionParameters['user'] == '' ? '' : $connectionParameters['user'].'@').$connectionParameters['host'].' '.$portCommand." -T 'cd ".$connectionParameters['logDirectory'].';tail -n '.$this->option('lines')." -f $(ls -t | head -n 1)'";
 
         $this->info('start tailing latest remote log on host '.$connectionParameters['host'].' (port '.$port.') in directory '.$connectionParameters['logDirectory']);
 
