@@ -20,14 +20,14 @@ return [
             'user' => '',
 
             /*
+             * The port to be used when connecting to the server where the logs are located
+             */
+            'port' => '22',
+
+            /*
              * The full path to the directory where the logs are located
              */
             'logDirectory' => '',
-
-            /*
-             * The port of remote ssh
-             */
-            'port' => '22'
         ],
     ],
 ];

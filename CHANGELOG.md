@@ -2,6 +2,9 @@
 
 All notable changes to laravel-tail will be documented in this file
 
+### 1.4.0 - 2016-03-16
+- add `port` to config file
+
 ### 1.3.0 - 2016-03-13
 - add `-l` option
 

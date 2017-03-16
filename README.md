@@ -48,6 +48,7 @@ A file named `tail.php` will be created in the config directory. The options you
 
 ```php
 return [
+
     'connections' => [
 
         /*
@@ -61,23 +62,23 @@ return [
             'host' => '',
 
             /*
-             * The username to be used when connecting to the server where the 
-             * logs are located
+             * The username to be used when connecting to the server where the logs are located
              */
             'user' => '',
+
+            /*
+             * The port to be used when connecting to the server where the logs are located
+             */
+            'port' => '22',
 
             /*
              * The full path to the directory where the logs are located
              */
             'logDirectory' => '',
-            
-            /*
-             * The port of remote ssh
-             */
-            'port' => '22'
         ],
     ],
 ];
+
 ```
 
 ## Usage
