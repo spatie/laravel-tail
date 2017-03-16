@@ -23,6 +23,11 @@ return [
              * The full path to the directory where the logs are located
              */
             'logDirectory' => '',
+
+            /*
+             * The port of remote ssh
+             */
+            'port' => '22'
         ],
     ],
 ];
