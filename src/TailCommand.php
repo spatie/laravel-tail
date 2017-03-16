@@ -75,7 +75,13 @@ class TailCommand extends Command
     {
         $connectionParameters = config('tail.connections.'.$connection);
         
-        $port = $connectionParameters['port'];
+        // set default port to 22 or use the port
+        // from config file if `port` is defined.
+        $port = 22;
+        if (!empty($connectionParameters['port'])) {
+        	$port = $connectionParameters['port'];
+        }
+
         $this->guardAgainstInvalidConnectionParameters($connectionParameters);
 
         $tailCommand = 'ssh '.($connectionParameters['user'] == '' ? '' : $connectionParameters['user'].'@').$connectionParameters['host']." -p " . $port . " -T 'cd ".$connectionParameters['logDirectory'].';tail -n '.$this->option('lines')." -f $(ls -t | head -n 1)'";
