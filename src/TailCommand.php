@@ -75,9 +75,9 @@ class TailCommand extends Command
     {
         $connectionParameters = config('tail.connections.'.$connection);
 
-        if (isset($connectionParameters['port'])) {
-            $portCommand = "-p {$connectionParameters['port']}";
-        }
+        $portCommand = isset($connectionParameters['port'])
+            ? "-p {$connectionParameters['port']}"
+            : '';
 
         $this->guardAgainstInvalidConnectionParameters($connectionParameters);
 

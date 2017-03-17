@@ -2,6 +2,9 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
+### 1.4.1 - 2016-03-17
+- fix backwards compatibility issue when `port` is not set in config file
+
 ### 1.4.0 - 2016-03-16
 - add `port` to config file
 
