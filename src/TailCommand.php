@@ -74,7 +74,6 @@ class TailCommand extends Command
     protected function tailRemoteLogFile($connection)
     {
         $connectionParameters = config('tail.connections.'.$connection);
-        
         $port = isset($connectionParameters['port']) ? $connectionParameters['port'] : '22';
 
         $portCommand = isset($connectionParameters['port'])
