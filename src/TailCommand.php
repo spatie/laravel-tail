@@ -75,7 +75,7 @@ class TailCommand extends Command
     {
         $connectionParameters = config('tail.connections.'.$connection);
         
-        $port = isset($connectionParameters['port'])?$connectionParameters['port']: '22';
+        $port = isset($connectionParameters['port']) ? $connectionParameters['port'] : '22';
 
         $portCommand = isset($connectionParameters['port'])
             ? "-p {$connectionParameters['port']}"
