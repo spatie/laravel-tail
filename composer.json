@@ -26,5 +26,12 @@
         "psr-4": {
             "Spatie\\Tail\\": "src"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Spatie\\Tail\\TailServiceProvider"
+            ]
+        }
     }
 }
