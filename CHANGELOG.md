@@ -4,7 +4,7 @@ All notable changes to `laravel-tail` will be documented in this file
 
 ### 1.4.2 - 2017-03-21
 
-- stabelize custom port support
+- stabilize custom port support
 
 ### 1.4.1 - 2017-03-17
 - fix backwards compatibility issue when `port` is not set in config file
