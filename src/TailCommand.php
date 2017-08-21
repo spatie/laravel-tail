@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Spatie\Tail;
 
 use SplFileInfo;
 use Illuminate\Console\Command;
