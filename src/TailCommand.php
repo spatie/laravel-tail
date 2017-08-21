@@ -14,7 +14,7 @@ class TailCommand extends Command
 
     public function handle()
     {
-        if (!$path = $this->findLatestLogFile()) {
+        if (! $path = $this->findLatestLogFile()) {
             $this->warn('Could not find a log file');
 
             return;
@@ -24,7 +24,7 @@ class TailCommand extends Command
 
         $this->info("start tailing {$path}");
 
-        $tailCommand = "tail -f -n {$lines} " . escapeshellarg($path);
+        $tailCommand = "tail -f -n {$lines} ".escapeshellarg($path);
 
         (new Process($tailCommand))
             ->setTimeout(null)
@@ -49,7 +49,5 @@ class TailCommand extends Command
     protected function executeCommand($command)
     {
         $output = $this->output;
-
-
     }
 }
