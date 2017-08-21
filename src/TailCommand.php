@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
+use SplFileInfo;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use SplFileInfo;
 
 class TailCommand extends Command
 {
@@ -15,7 +15,7 @@ class TailCommand extends Command
     public function handle()
     {
         if (! $path = $this->findLatestLogFile()) {
-            $this->warn("Could not find a log file");
+            $this->warn('Could not find a log file');
 
             return;
         }
@@ -24,7 +24,7 @@ class TailCommand extends Command
 
         $this->info("start tailing {$path}");
 
-        $tailCommand = "tail -f -n {$lines} " . escapeshellarg($path);
+        $tailCommand = "tail -f -n {$lines} ".escapeshellarg($path);
 
         $this->executeCommand($tailCommand);
 
