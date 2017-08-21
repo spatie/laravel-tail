@@ -15,8 +15,10 @@ class TailCommand extends Command
 
     public function handle()
     {
-        if (!$path = $this->findLatestLogFile()) {
-            $this->warn('Could not find a log file');
+        $logDirectory = storage_path('logs');
+
+        if (!$path = $this->findLatestLogFile($logDirectory)) {
+            $this->warn("Could not find a log file in `{$logDirectory}`.");
 
             return;
         }
@@ -34,9 +36,9 @@ class TailCommand extends Command
             });
     }
 
-    protected function findLatestLogFile()
+    protected function findLatestLogFile(string $directory)
     {
-        $logFile = collect(File::allFiles(storage_path('logs')))
+        $logFile = collect(File::allFiles($directory))
             ->sortByDesc(function (SplFileInfo $file) {
                 return $file->getMTime();
             })
