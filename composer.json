@@ -1,11 +1,12 @@
 {
     "name": "spatie/laravel-tail",
-    "description": "Easily tail the application log in Laravel applications",
+    "description": "Easily tail the application log",
     "keywords": [
         "laravel",
         "tail",
         "log",
-        "laravel-tail"
+        "laravel-tail",
+        "development"
     ],
     "homepage": "https://github.com/spatie/laravel-tail",
     "license": "MIT",
