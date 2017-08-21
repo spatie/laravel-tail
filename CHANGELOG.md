@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
+### 2.0.0 - 2017-XX-XX
+
+- add support for Laravel 5.5
+- drop support for all older Laravel versions
+- drop support for remote tailing
+
 ### 1.4.2 - 2017-03-21
 
 - stabilize custom port support
