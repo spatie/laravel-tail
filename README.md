@@ -26,7 +26,7 @@ You can install the package via composer:
 composer require spatie/laravel-tail
 ```
 
-The package will auto register in your Laravel app.
+You're done. Run `php artisan tail` to tail your log.
 
 ## Usage
 
