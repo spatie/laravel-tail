@@ -17,7 +17,7 @@ class TailCommand extends Command
     {
         $logDirectory = storage_path('logs');
 
-        if (!$path = $this->findLatestLogFile($logDirectory)) {
+        if (! $path = $this->findLatestLogFile($logDirectory)) {
             $this->warn("Could not find a log file in `{$logDirectory}`.");
 
             return;
@@ -27,7 +27,7 @@ class TailCommand extends Command
 
         $this->info("start tailing {$path}");
 
-        $tailCommand = "tail -f -n {$lines} " . escapeshellarg($path);
+        $tailCommand = "tail -f -n {$lines} ".escapeshellarg($path);
 
         (new Process($tailCommand))
             ->setTimeout(null)
@@ -52,7 +52,5 @@ class TailCommand extends Command
     protected function executeCommand($command)
     {
         $output = $this->output;
-
-
     }
 }
