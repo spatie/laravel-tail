@@ -6,7 +6,7 @@
 [![StyleCI](https://styleci.io/repos/30608411/shield?branch=master)](https://styleci.io/repos/30608411)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-tail.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-tail)
 
-This package offers an Artisan command to tail the application log. It supports daily and single logs and tailing both local and remote logs.
+This package offers an Artisan command to tail the application log. It supports daily and single logs on your local machine.
 
 Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
@@ -30,7 +30,7 @@ You're done. Run `php artisan tail` to tail your log.
 
 ## Usage
 
-To tail the local log you can use this command:
+To tail the log you can use this command:
 
 ```bash
 php artisan tail
