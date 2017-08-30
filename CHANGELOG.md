@@ -2,7 +2,7 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
-### 2.0.0 - 2017-XX-XX
+### 2.0.0 - 2017-08-30
 
 - add support for Laravel 5.5
 - drop support for all older Laravel versions
