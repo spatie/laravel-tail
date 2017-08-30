@@ -4,6 +4,8 @@ All notable changes to `laravel-tail` will be documented in this file
 
 ### 2.0.1 - 2017-08-30
 
+- fix deps
+
 ### 2.0.0 - 2017-08-30
 
 - add support for Laravel 5.5
