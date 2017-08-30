@@ -2,160 +2,57 @@
 
 namespace Spatie\Tail;
 
-use Exception;
+use SplFileInfo;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 
 class TailCommand extends Command
 {
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
-    protected $name = 'tail';
+    protected $signature = 'tail {--lines=100}';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Tail the latest logfile';
 
-    /**
-     * Create a new command instance.
-     */
-    public function __construct()
+    public function handle()
     {
-        parent::__construct();
-    }
+        $logDirectory = storage_path('logs');
 
-    /**
-     * Execute the console command.
-     * @return mixed
-     * @throws Exception
-     */
-    public function fire()
-    {
-        if (is_null($this->argument('connection'))) {
-            $this->tailLocalLogFile();
-        } else {
-            $this->tailRemoteLogFile($this->argument('connection'));
+        if (!$path = $this->findLatestLogFile($logDirectory)) {
+            $this->warn("Could not find a log file in `{$logDirectory}`.");
+
+            return;
         }
-    }
-
-    /**
-     * Tail the latest local log file.
-     *
-     * @return null|string
-     */
-    private function tailLocalLogFile()
-    {
-        $path = $this->findNewestLocalLogfile();
 
         $lines = $this->option('lines');
 
-        $this->info('start tailing '.$path);
+        $this->info("start tailing {$path}");
 
-        $tailCommand = 'tail -f -n '.$lines.' '.escapeshellarg($path);
+        $tailCommand = "tail -f -n {$lines} " . escapeshellarg($path);
 
-        $this->executeCommand($tailCommand);
-
-        return $path;
+        (new Process($tailCommand))
+            ->setTimeout(null)
+            ->run(function ($type, $line) {
+                $this->output->write($line);
+            });
     }
 
-    /**
-     * Tail the latest remote log file for the given connection.
-     *
-     * @param string $connection
-     */
-    protected function tailRemoteLogFile($connection)
+    protected function findLatestLogFile(string $directory)
     {
-        $connectionParameters = config('tail.connections.'.$connection);
-        $port = isset($connectionParameters['port']) ? $connectionParameters['port'] : '22';
+        $logFile = collect(File::allFiles($directory))
+            ->sortByDesc(function (SplFileInfo $file) {
+                return $file->getMTime();
+            })
+            ->first();
 
-        $portCommand = isset($connectionParameters['port'])
-            ? "-p {$connectionParameters['port']}"
-            : '';
-
-        $this->guardAgainstInvalidConnectionParameters($connectionParameters);
-
-        $tailCommand = 'ssh '.($connectionParameters['user'] == '' ? '' : $connectionParameters['user'].'@').$connectionParameters['host'].' '.$portCommand." -T 'cd ".$connectionParameters['logDirectory'].';tail -n '.$this->option('lines')." -f $(ls -t | head -n 1)'";
-
-        $this->info('start tailing latest remote log on host '.$connectionParameters['host'].' (port '.$port.') in directory '.$connectionParameters['logDirectory']);
-
-        $this->executeCommand($tailCommand);
+        return $logFile
+            ? $logFile->getPathname()
+            : false;
     }
 
-    /**
-     * Execute the given command.
-     *
-     * @param string $command
-     */
     protected function executeCommand($command)
     {
         $output = $this->output;
 
-        (new Process($command))->setTimeout(null)->run(function ($type, $line) use ($output) {
-            $output->write($line);
-        });
-    }
 
-    /**
-     * Get the path to the latest local Laravel log file.
-     *
-     * @return null|string
-     */
-    protected function findNewestLocalLogfile()
-    {
-        $files = glob(storage_path('logs').'/*.log');
-        $files = array_combine($files, array_map('filemtime', $files));
-        arsort($files);
-        $newestLogFile = key($files);
-
-        return $newestLogFile;
-    }
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return [
-            ['lines', 'l', InputOption::VALUE_OPTIONAL, 'The number of lines to tail.', 20],
-        ];
-    }
-
-    /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments()
-    {
-        return [
-            ['connection', InputArgument::OPTIONAL, 'The remote connection name'],
-        ];
-    }
-
-    /**
-     * Guard againt invalid connectionParameters.
-     *
-     * @param $connectionParameters
-     * @throws Exception
-     */
-    protected function guardAgainstInvalidConnectionParameters($connectionParameters)
-    {
-        if ($connectionParameters['host'] == '') {
-            throw new Exception('Hostname is required');
-        }
-
-        if ($connectionParameters['logDirectory'] == '') {
-            throw new Exception('LogDirectory is required');
-        }
     }
 }
