@@ -55,6 +55,8 @@ If you discover any security related issues, please email freek@spatie.be instea
 - [Freek Van der Herten](https://github.com/freekmurze)
 - [All Contributors](../../contributors)
 
+This package was created because [the awesome tail command present in Laravel 4](https://github.com/laravel/framework/blob/4.2/src/Illuminate/Foundation/Console/TailCommand.php) was dropped in Laravel 5. The tail command from this package is equivalent to Laravel's old one minus the remote tailing features.
+
 ## About Spatie
 Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource). 
 
