@@ -28,7 +28,7 @@ To tail the log you can use this command:
 php artisan tail
 ```
 
-By default the last 20 lines will be shown. You can change that number by using the `lines`-option.
+You can start the output with displaying the last lines in the log by using the `lines`-option.
 
 ```bash
 php artisan tail --lines=50
