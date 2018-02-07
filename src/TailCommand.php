@@ -9,7 +9,7 @@ use Symfony\Component\Process\Process;
 
 class TailCommand extends Command
 {
-    protected $signature = 'tail {--lines=100}';
+    protected $signature = 'tail {--lines=0}';
 
     protected $description = 'Tail the latest logfile';
 
@@ -24,8 +24,6 @@ class TailCommand extends Command
         }
 
         $lines = $this->option('lines');
-
-        $this->info("start tailing {$path}");
 
         $tailCommand = "tail -f -n {$lines} ".escapeshellarg($path);
 

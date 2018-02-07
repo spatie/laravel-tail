@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
+### 3.0.0 - 2017-02-07
+
+- don't display any initial output
+- add support for L5.6
+
 ### 2.0.1 - 2017-08-30
 
 - fix deps
