@@ -9,7 +9,7 @@ use Symfony\Component\Process\Process;
 
 class TailCommand extends Command
 {
-    protected $signature = 'tail {--lines=0}';
+    protected $signature = 'tail {--lines=0} {--clear}';
 
     protected $description = 'Tail the latest logfile';
 
@@ -27,9 +27,13 @@ class TailCommand extends Command
 
         $tailCommand = "tail -f -n {$lines} ".escapeshellarg($path);
 
+        $this->optionallyClear();
+
         (new Process($tailCommand))
             ->setTimeout(null)
             ->run(function ($type, $line) {
+                $this->optionallyClear();
+
                 $this->output->write($line);
             });
     }
@@ -45,6 +49,15 @@ class TailCommand extends Command
         return $logFile
             ? $logFile->getPathname()
             : false;
+    }
+
+    protected function optionallyClear()
+    {
+        if (!$this->option('clear')) {
+            return;
+        }
+
+        $this->output->write(sprintf("\033\143\e[3J"));
     }
 
     protected function executeCommand($command)
