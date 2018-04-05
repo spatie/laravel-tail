@@ -53,7 +53,7 @@ class TailCommand extends Command
 
     protected function optionallyClear()
     {
-        if (!$this->option('clear')) {
+        if (! $this->option('clear')) {
             return;
         }
 
