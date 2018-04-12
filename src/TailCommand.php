@@ -27,12 +27,12 @@ class TailCommand extends Command
 
         $tailCommand = "tail -f -n {$lines} ".escapeshellarg($path);
 
-        $this->optionallyClear();
+        $this->handleClearOption();
 
         (new Process($tailCommand))
             ->setTimeout(null)
             ->run(function ($type, $line) {
-                $this->optionallyClear();
+                $this->handleClearOption();
 
                 $this->output->write($line);
             });
@@ -51,7 +51,7 @@ class TailCommand extends Command
             : false;
     }
 
-    protected function optionallyClear()
+    protected function handleClearOption()
     {
         if (! $this->option('clear')) {
             return;
