@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
+### 3.1.0 - 2018-04-12
+
+- Add `--clear` option
+
 ### 3.0.1 - 2018-02-07
 
 - fix deps
