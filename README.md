@@ -34,6 +34,13 @@ You can start the output with displaying the last lines in the log by using the 
 php artisan tail --lines=50
 ```
 
+It's also possible to fully clear the output buffer after each log item.
+This can be useful if you're only interested in the last log entry when debugging.
+
+```bash
+php artisan tail --clear
+```
+
 ### Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
