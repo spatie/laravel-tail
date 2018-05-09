@@ -14,9 +14,4 @@ class TailServiceProvider extends ServiceProvider
             ]);
         }
     }
-
-    public function provides()
-    {
-        return ['command.tail'];
-    }
 }
