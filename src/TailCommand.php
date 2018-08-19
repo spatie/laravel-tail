@@ -9,7 +9,7 @@ use Symfony\Component\Process\Process;
 
 class TailCommand extends Command
 {
-    protected $signature = 'tail {--lines=0} {--clear}';
+    protected $signature = 'tail {--lines=0} {--clear} {--hide-stack-traces}';
 
     protected $description = 'Tail the latest logfile';
 
@@ -25,7 +25,9 @@ class TailCommand extends Command
 
         $lines = $this->option('lines');
 
-        $tailCommand = "tail -f -n {$lines} ".escapeshellarg($path);
+        $filters = $this->getFilters();
+
+        $tailCommand = "tail -f -n {$lines} {$filters} ".escapeshellarg($path);
 
         $this->handleClearOption();
 
@@ -58,6 +60,13 @@ class TailCommand extends Command
         }
 
         $this->output->write(sprintf("\033\143\e[3J"));
+    }
+
+    protected function getFilters()
+    {
+        if ($this->option('hide-stack-traces')) {
+            return '| grep -i -E "^\[\d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2}\]|Next [\w\W]+?\:" --color';
+        }
     }
 
     protected function executeCommand($command)
