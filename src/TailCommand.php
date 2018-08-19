@@ -9,7 +9,10 @@ use Symfony\Component\Process\Process;
 
 class TailCommand extends Command
 {
-    protected $signature = 'tail {--lines=0} {--clear} {--hide-stack-traces}';
+    protected $signature = 'tail
+                            {--lines=0 : Output the last number of lines}
+                            {--hide-stack-traces : Filter out the stack traces}
+                            {--clear : Clear the terminal screen}';
 
     protected $description = 'Tail the latest logfile';
 
