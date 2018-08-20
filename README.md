@@ -34,6 +34,12 @@ You can start the output with displaying the last lines in the log by using the 
 php artisan tail --lines=50
 ```
 
+To filter out stack traces from the output, you can add the `hide-stack-traces`-option.
+
+```bash
+php artisan tail --hide-stack-traces
+```
+
 It's also possible to fully clear the output buffer after each log item.
 This can be useful if you're only interested in the last log entry when debugging.
 
