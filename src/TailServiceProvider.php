@@ -20,7 +20,7 @@ class TailServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            TailCommand::class
+            TailCommand::class,
         ];
     }
 }
