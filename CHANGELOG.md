@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
+### 3.2.2 - 2018-08-20
+
+- prevent the package from being loaded in every web request
+
 ### 3.2.1 - 2018-08-20
 
 - add support for Laravel 5.7
