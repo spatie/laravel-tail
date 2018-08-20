@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
+### 3.2.1 - 2018-08-20
+
+- add support for Laravel 5.7
+
 ### 3.2.0 - 2018-08-20
 
 - add `--hide-stack-traces` option
