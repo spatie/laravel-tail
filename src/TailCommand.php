@@ -35,6 +35,7 @@ class TailCommand extends Command
         $this->handleClearOption();
 
         (new Process($tailCommand))
+            ->setTty(true)
             ->setTimeout(null)
             ->run(function ($type, $line) {
                 $this->handleClearOption();
