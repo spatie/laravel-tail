@@ -2,9 +2,13 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
+### 3.2.0 - 2018-08-20
+
+- add `--hide-stack-traces` option
+
 ### 3.1.0 - 2018-04-12
 
-- Add `--clear` option
+- add `--clear` option
 
 ### 3.0.1 - 2018-02-07
 
