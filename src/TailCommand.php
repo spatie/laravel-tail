@@ -72,9 +72,4 @@ class TailCommand extends Command
             return '| grep -i -E "^\[\d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2}\]|Next [\w\W]+?\:"';
         }
     }
-
-    protected function executeCommand($command)
-    {
-        $output = $this->output;
-    }
 }
