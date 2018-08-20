@@ -69,7 +69,7 @@ class TailCommand extends Command
     protected function getFilters()
     {
         if ($this->option('hide-stack-traces')) {
-            return '| grep -i -E "^\[\d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2}\]|Next [\w\W]+?\:" --color';
+            return '| grep -i -E "^\[\d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2}\]|Next [\w\W]+?\:"';
         }
     }
 
