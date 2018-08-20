@@ -34,7 +34,7 @@ You can start the output with displaying the last lines in the log by using the 
 php artisan tail --lines=50
 ```
 
-To filter out stack traces from the output, you can add the `hide-stack-traces`-option.
+To filter out stack traces from the output, you can use the `hide-stack-traces`-option.
 
 ```bash
 php artisan tail --hide-stack-traces
