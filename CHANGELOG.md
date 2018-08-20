@@ -2,8 +2,13 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
+### 3.2.3 - 2018-08-20
+
+- add `provides` to service provider
+
 ### 3.2.2 - 2018-08-20
 
+**THIS VERSION DOES NOT WORK, DO NOT USE**
 - prevent the package from being loaded in every web request
 
 ### 3.2.1 - 2018-08-20
