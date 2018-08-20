@@ -30,7 +30,7 @@ class TailCommand extends Command
 
         $filters = $this->getFilters();
 
-        $tailCommand = "tail -f -n {$lines} {$filters} ".escapeshellarg($path);
+        $tailCommand = "tail -n {$lines} -f ".escapeshellarg($path)." {$filters}";
 
         $this->handleClearOption();
 
