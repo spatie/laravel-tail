@@ -34,10 +34,22 @@ You can start the output with displaying the last lines in the log by using the 
 php artisan tail --lines=50
 ```
 
-To filter out stack traces from the output, you can use the `hide-stack-traces`-option.
+To filter out stack traces from the output, you can use the `hide-stack-traces`-option (or `H`).
 
 ```bash
 php artisan tail --hide-stack-traces
+```
+
+To add some color/hightlight the logs add `color`-option (or `C`).
+
+```bash
+php artisan tail --color
+```
+
+You can combine the options too. To hide stack traces and add color:
+
+```bash
+php artisan tail -HC
 ```
 
 It's also possible to fully clear the output buffer after each log item.
