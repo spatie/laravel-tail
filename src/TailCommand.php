@@ -12,6 +12,7 @@ class TailCommand extends Command
     protected $signature = 'tail
                             {--lines=0 : Output the last number of lines}
                             {--H|hide-stack-traces : Filter out the stack traces}
+                            {--C|color : Add color to matched strings}
                             {--clear : Clear the terminal screen}';
 
     protected $description = 'Tail the latest logfile';
@@ -68,8 +69,21 @@ class TailCommand extends Command
 
     protected function getFilters()
     {
-        if ($this->option('hide-stack-traces')) {
-            return '| grep -i -E "^\[\d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2}\]|Next [\w\W]+?\:"';
+        $hideTraces = $this->option('hide-stack-traces');
+        $addColor = $this->option('color');
+
+        if (! $hideTraces && ! $addColor) {
+            return '';
         }
+
+        $patterns = '^\[\d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2}\]|Next [\w\W]+?\:';
+
+        if ($addColor && ! $hideTraces) {
+            $patterns .= '|^';
+        }
+
+        $colorFlag = $addColor ? '--color' : '';
+
+        return "| grep {$colorFlag} -i -E \"{$patterns}\"";
     }
 }
