@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
+### 3.2.4 - 2019-02-26
+
+- add support for Laravel 5.8
+
 ### 3.2.3 - 2018-08-20
 
 - add `provides` to service provider
