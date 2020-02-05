@@ -2,9 +2,9 @@
 
 namespace Spatie\Tail;
 
-use SplFileInfo;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use SplFileInfo;
 use Symfony\Component\Process\Process;
 
 class TailCommand extends Command
