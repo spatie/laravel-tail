@@ -8,9 +8,19 @@
 
 This package offers an Artisan command to tail the application log. It supports daily and single logs on your local machine.
 
-Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
+To tail the log you can use this command:
 
-## Install
+```bash
+php artisan tail
+```
+
+## Support us
+
+We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us). 
+
+We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+
+## Installation
 
 You can install the package via composer:
 
@@ -73,13 +83,6 @@ We publish all received postcards [on our company website](https://spatie.be/en/
 - [All Contributors](../../contributors)
 
 This package was created because [the awesome tail command present in Laravel 4](https://github.com/laravel/framework/blob/4.2/src/Illuminate/Foundation/Console/TailCommand.php) was dropped in Laravel 5. The tail command from this package is equivalent to Laravel's old one minus the remote tailing features.
-
-## Support us
-
-Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
-
-Does your business depend on our contributions? Reach out and support us on [Patreon](https://www.patreon.com/spatie). 
-All pledges will be dedicated to allocating workforce on maintenance and new awesome stuff.
 
 ## License
 
