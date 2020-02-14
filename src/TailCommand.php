@@ -2,59 +2,28 @@
 
 namespace Spatie\Tail;
 
+use Exception;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\File;
-use SplFileInfo;
+use Spatie\Ssh\Ssh;
 use Symfony\Component\Process\Process;
 
 class TailCommand extends Command
 {
-    protected $signature = 'tail
+    protected $signature = 'tail {environment?}
                             {--lines=0 : Output the last number of lines}
-                            {--H|hide-stack-traces : Filter out the stack traces}
                             {--clear : Clear the terminal screen}';
 
     protected $description = 'Tail the latest logfile';
 
     public function handle()
     {
-        $logDirectory = storage_path('logs');
-
-        if (! $path = $this->findLatestLogFile($logDirectory)) {
-            $this->warn("Could not find a log file in `{$logDirectory}`.");
-
-            return;
-        }
-
-        $lines = $this->option('lines');
-
-        $filters = $this->getFilters();
-
-        $tailCommand = "tail -n {$lines} -f ".escapeshellarg($path)." {$filters}";
-
         $this->handleClearOption();
 
-        (new Process($tailCommand))
-            ->setTty(true)
-            ->setTimeout(null)
-            ->run(function ($type, $line) {
-                $this->handleClearOption();
+        $environment = $this->argument('environment');
 
-                $this->output->write($line);
-            });
-    }
-
-    protected function findLatestLogFile(string $directory)
-    {
-        $logFile = collect(File::allFiles($directory))
-            ->sortByDesc(function (SplFileInfo $file) {
-                return $file->getMTime();
-            })
-            ->first();
-
-        return $logFile
-            ? $logFile->getPathname()
-            : false;
+        is_null($environment)
+            ? $this->tailLocally()
+            : $this->tailRemotely($environment);
     }
 
     protected function handleClearOption()
@@ -66,10 +35,52 @@ class TailCommand extends Command
         $this->output->write(sprintf("\033\143\e[3J"));
     }
 
-    protected function getFilters()
+    protected function tailLocally(): void
     {
-        if ($this->option('hide-stack-traces')) {
-            return '| grep -i -E "^\[\d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2}\]|Next [\w\W]+?\:"';
+        $logDirectory = storage_path('logs');
+
+        Process::fromShellCommandline($this->getTailCommand(), $logDirectory)
+            ->setTty(true)
+            ->setTimeout(null)
+            ->run(function ($type, $line) {
+                $this->handleClearOption();
+
+                $this->output->write($line);
+            });
+    }
+
+    protected function tailRemotely(string $environment): void
+    {
+        $environmentConfig = $this->getEnvironmentConfiguration($environment);
+
+        Ssh::create($environmentConfig['user'], $environmentConfig['host'])
+            ->configureProcess(function (Process $process) {
+                $process->setTty(true);
+            })
+            ->onOutput(function ($type, $line) {
+                $this->handleClearOption();
+
+                $this->output->write($line);
+            })
+            ->execute([
+                "cd {$environmentConfig['log_directory']}",
+                $this->getTailCommand($environmentConfig['log_directory']),
+            ]);
+    }
+
+    protected function getEnvironmentConfiguration(string $environment): array
+    {
+        $config = config('tail');
+
+        if (! isset($config[$environment])) {
+            throw new Exception("No configuration set for environment `{$environment}`. Make sure this environment is specified in the `tail` config file!");
         }
+
+        return $config[$environment];
+    }
+
+    public function getTailCommand(): string
+    {
+        return 'tail -f -n '.$this->option('lines').' "`ls -t | head -1`"';
     }
 }
