@@ -6,12 +6,18 @@
 [![StyleCI](https://styleci.io/repos/30608411/shield?branch=master)](https://styleci.io/repos/30608411)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-tail.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-tail)
 
-This package offers an Artisan command to tail the application log. It supports daily and single logs on your local machine.
+This package offers an artisan command to tail the application log. It supports daily and single logs on your local machine.
 
 To tail the log you can use this command:
 
 ```bash
 php artisan tail
+```
+
+It can also tail logs on other environments:
+
+```bash
+php artisan tail production
 ```
 
 ## Support us
@@ -28,7 +34,35 @@ You can install the package via composer:
 composer require spatie/laravel-tail
 ```
 
-You're done. Run `php artisan tail` to tail your log.
+You can publish the config file with:
+```bash
+php artisan vendor:publish --provider="Spatie\Tail\TailServiceProvider"
+```
+
+This is the contents of the file that will be published at `config/tail.php`:
+
+```php
+return [
+    'production' => [
+        
+        /*
+         * The host that contains your logs.
+         */
+        'host' => env('TAIL_HOST_PRODUCTION', ''),
+
+        /*
+         * The user to be used to SSH to the server.
+         */
+        'user' => env('TAIL_USER_PRODUCTION', ''),
+
+        /*
+         * The path to the directory that contains your logs.
+         */
+        'log_directory' => env('TAIL_LOG_DIRECTORY_PRODUCTION', ''),
+        
+    ],
+];
+```
 
 ## Usage
 

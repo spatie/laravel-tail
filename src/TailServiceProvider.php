@@ -6,7 +6,12 @@ use Illuminate\Support\ServiceProvider;
 
 class TailServiceProvider extends ServiceProvider
 {
-    protected $defer = true;
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__ . '/../config/tail.php' => config_path('tail.php'),
+        ], 'tail-config');
+    }
 
     public function register()
     {
@@ -15,6 +20,9 @@ class TailServiceProvider extends ServiceProvider
                 TailCommand::class,
             ]);
         }
+
+        $this->mergeConfigFrom(__DIR__ . '/../config/tail.php', 'tail');
+
     }
 
     public function provides()

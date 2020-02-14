@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
+### 4.0.0 - 2020-02-14
+
+- add option to tail remotely
+
 ### 3.3.0 - 2019-09-04
 
 - add support for Laravel 6.0
