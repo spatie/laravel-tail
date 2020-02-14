@@ -67,7 +67,7 @@ return [
 
 ## Usage
 
-To tail the log you can use this command:
+To tail the local log you can use this command:
 
 ```bash
 php artisan tail
@@ -79,18 +79,24 @@ You can start the output with displaying the last lines in the log by using the 
 php artisan tail --lines=50
 ```
 
-To filter out stack traces from the output, you can use the `hide-stack-traces`-option.
-
-```bash
-php artisan tail --hide-stack-traces
-```
-
 It's also possible to fully clear the output buffer after each log item.
 This can be useful if you're only interested in the last log entry when debugging.
 
 ```bash
 php artisan tail --clear
 ```
+
+### Tailing remote logs
+
+To tail remote logs, you must first specify values for `host`, `user` and `log_directory` keys of an environment in the `tail` config file.
+
+After that you can tail that logs of an environment like this
+
+```bash
+php artisan tail production
+```
+
+You can also use the `--clear` and `--lines` options described above.
 
 ### Changelog
 
