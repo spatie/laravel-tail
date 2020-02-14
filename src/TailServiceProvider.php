@@ -9,7 +9,7 @@ class TailServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/tail.php' => config_path('tail.php'),
+            __DIR__.'/../config/tail.php' => config_path('tail.php'),
         ], 'tail-config');
     }
 
@@ -21,8 +21,7 @@ class TailServiceProvider extends ServiceProvider
             ]);
         }
 
-        $this->mergeConfigFrom(__DIR__ . '/../config/tail.php', 'tail');
-
+        $this->mergeConfigFrom(__DIR__.'/../config/tail.php', 'tail');
     }
 
     public function provides()

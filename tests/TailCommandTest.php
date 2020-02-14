@@ -10,7 +10,7 @@ class TailCommandTest extends TestCase
         $this->expectExceptionMessageMatches('/^No configuration set/');
 
         $this->artisan('tail', [
-           'environment' => 'non-existing-environment',
+            'environment' => 'non-existing-environment',
         ]);
     }
 }
