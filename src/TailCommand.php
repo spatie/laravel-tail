@@ -28,7 +28,7 @@ class TailCommand extends Command
 
     protected function handleClearOption()
     {
-        if (!$this->option('clear')) {
+        if (! $this->option('clear')) {
             return;
         }
 
@@ -72,7 +72,7 @@ class TailCommand extends Command
     {
         $config = config('tail');
 
-        if (!isset($config[$environment])) {
+        if (! isset($config[$environment])) {
             throw new Exception("No configuration set for environment `{$environment}`. Make sure this environment is specified in the `tail` config file!");
         }
 
@@ -81,6 +81,6 @@ class TailCommand extends Command
 
     public function getTailCommand(): string
     {
-        return 'tail -f -n ' . $this->option('lines') . ' "`ls -t | head -1`"';
+        return 'tail -f -n '.$this->option('lines').' "`ls -t | head -1`"';
     }
 }
