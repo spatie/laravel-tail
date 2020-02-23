@@ -80,8 +80,8 @@ class TailCommand extends Command
 
     public function getTailCommand(): string
     {
-        $grep = ($this->option('grep')) ? ' | grep "' . $this->option('grep').'"' : '';
+        $grep = ($this->option('grep')) ? ' | grep "'.$this->option('grep').'"' : '';
 
-        return 'tail -f -n '.$this->option('lines').' "`ls -t | head -1`"' . $grep;
+        return 'tail -f -n '.$this->option('lines').' "`ls -t | head -1`"'.$grep;
     }
 }
