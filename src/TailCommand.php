@@ -12,12 +12,19 @@ class TailCommand extends Command
     protected $signature = 'tail {environment?}
                             {--lines=0 : Output the last number of lines}
                             {--clear : Clear the terminal screen}
-                            {--grep="" : Grep specified string}';
+                            {--grep : Grep specified string}
+                            {--debug : "Display the underlying tail command}';
 
     protected $description = 'Tail the latest logfile';
 
     public function handle()
     {
+        if ($this->option('debug')) {
+            $this->info($this->getTailCommand());
+
+            return;
+        }
+
         $this->handleClearOption();
 
         $environment = $this->argument('environment');
@@ -80,7 +87,9 @@ class TailCommand extends Command
 
     public function getTailCommand(): string
     {
-        $grep = ($this->option('grep')) ? ' | grep "' . $this->option('grep').'"' : '';
+        $grep = $this->option('grep')
+            ? ' | grep "' . $this->option('grep').'"'
+            : '';
 
         return 'tail -f -n '.$this->option('lines').' "`ls -t | head -1`"' . $grep;
     }

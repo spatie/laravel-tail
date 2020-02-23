@@ -13,4 +13,25 @@ class TailCommandTest extends TestCase
             'environment' => 'non-existing-environment',
         ]);
     }
+
+    /** @test */
+    public function the_tail_command_is_correct()
+    {
+        $this
+            ->artisan('tail', [
+                '--debug' => true,
+            ])
+            ->expectsOutput('tail -f -n 0 "`ls -t | head -1`"');
+    }
+
+    /** @test */
+    public function the_command_when_grepping_is_correct()
+    {
+        $this
+            ->artisan('tail', [
+                '--debug' => true,
+                '--grep' => 'test',
+            ])
+            ->expectsOutput('tail -f -n 0 "`ls -t | head -1`" | grep "test"');
+    }
 }

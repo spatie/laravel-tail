@@ -89,7 +89,7 @@ php artisan tail --clear
 Should you wish to filter the log to return only certain keywords then you can also use the grep feature.
 
 ```bash
-php artisan tail --grep="keywords"
+php artisan tail --grep="only display lines that contain this string"
 ```
 
 ### Tailing remote logs
