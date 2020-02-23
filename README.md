@@ -86,6 +86,12 @@ This can be useful if you're only interested in the last log entry when debuggin
 php artisan tail --clear
 ```
 
+Should you wish to filter the log to return only certain keywords then you can also use the grep feature.
+
+```bash
+php artisan tail --grep="keywords"
+```
+
 ### Tailing remote logs
 
 To tail remote logs, you must first specify values for `host`, `user` and `log_directory` keys of an environment in the `tail` config file.
