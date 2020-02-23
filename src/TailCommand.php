@@ -11,7 +11,8 @@ class TailCommand extends Command
 {
     protected $signature = 'tail {environment?}
                             {--lines=0 : Output the last number of lines}
-                            {--clear : Clear the terminal screen}';
+                            {--clear : Clear the terminal screen}
+                            {--grep="" : Grep specified string}';
 
     protected $description = 'Tail the latest logfile';
 
@@ -79,6 +80,8 @@ class TailCommand extends Command
 
     public function getTailCommand(): string
     {
-        return 'tail -f -n '.$this->option('lines').' "`ls -t | head -1`"';
+        $grep = ($this->option('grep')) ? ' | grep "' . $this->option('grep').'"' : '';
+
+        return 'tail -f -n '.$this->option('lines').' "`ls -t | head -1`"' . $grep;
     }
 }
