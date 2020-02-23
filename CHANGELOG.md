@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
+### 4.1.0 - 2020-02-23
+
+- add `grep` option
+
 ### 4.0.0 - 2020-02-14
 
 - add option to tail remotely
