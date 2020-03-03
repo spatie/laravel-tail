@@ -20,13 +20,13 @@
     ],
     "require": {
         "php" : "^7.4",
-        "illuminate/support": "~5.8.0|^6.0",
-        "illuminate/console": "~5.8.0|^6.0",
+        "illuminate/support": "~5.8.0|^6.0|7.0",
+        "illuminate/console": "~5.8.0|^6.0|7.0",
         "symfony/process": "^4.0|^5.0",
         "spatie/ssh": "^1.3"
     },
     "require-dev": {
-        "orchestra/testbench": "^4.6",
+        "orchestra/testbench": "^4.6|5.0",
         "phpunit/phpunit": "^9.0"
 
     },
@@ -46,5 +46,7 @@
                 "Spatie\\Tail\\TailServiceProvider"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
