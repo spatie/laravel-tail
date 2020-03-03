@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
+### 4.2.0 - 2020-03-03
+
+- add support for Laravel 7
+
 ### 4.1.0 - 2020-02-23
 
 - add `grep` option
@@ -12,7 +16,7 @@ All notable changes to `laravel-tail` will be documented in this file
 
 ### 3.3.0 - 2019-09-04
 
-- add support for Laravel 6.0
+- add support for Laravel 6
 
 ### 3.2.4 - 2019-02-26
 
