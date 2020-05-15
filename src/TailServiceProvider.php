@@ -10,9 +10,8 @@ class TailServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/tail.php' => config_path('tail.php'),
+                __DIR__.'/../config/tail.php' => config_path('tail.php'),
             ], 'tail-config');
-
 
             $this->commands([
                 TailCommand::class,
@@ -22,6 +21,6 @@ class TailServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/tail.php', 'tail');
+        $this->mergeConfigFrom(__DIR__.'/../config/tail.php', 'tail');
     }
 }
