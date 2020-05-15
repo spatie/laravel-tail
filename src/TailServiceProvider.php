@@ -23,11 +23,4 @@ class TailServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(__DIR__.'/../config/tail.php', 'tail');
     }
-
-    public function provides()
-    {
-        return [
-            TailCommand::class,
-        ];
-    }
 }
