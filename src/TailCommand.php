@@ -12,7 +12,7 @@ class TailCommand extends Command
     protected $signature = 'tail {environment?}
                             {--lines=0 : Output the last number of lines}
                             {--clear : Clear the terminal screen}
-                            {--grep : Grep specified string}
+                            {--grep= : Grep specified string}
                             {--debug : "Display the underlying tail command}';
 
     protected $description = 'Tail the latest logfile';
