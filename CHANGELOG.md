@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
+### 4.2.2 - 2020-09-09
+
+- Support Laravel 8
+
 ### 4.2.1 - 2020-06-08
 
 - fix `--grep` option (#60)
