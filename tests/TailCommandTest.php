@@ -25,6 +25,17 @@ class TailCommandTest extends TestCase
     }
 
     /** @test */
+    public function the_tail_command_with_file_is_correct()
+    {
+        $this
+            ->artisan('tail', [
+                '--debug' => true,
+                '--file' => 'file.log',
+            ])
+            ->expectsOutput('tail -f -n 0 "file.log"');
+    }
+
+    /** @test */
     public function the_command_when_grepping_is_correct()
     {
         $this

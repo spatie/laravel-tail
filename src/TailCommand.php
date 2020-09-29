@@ -10,10 +10,11 @@ use Symfony\Component\Process\Process;
 class TailCommand extends Command
 {
     protected $signature = 'tail {environment?}
+                            {--file= : Name of the log file to tail}
                             {--lines=0 : Output the last number of lines}
                             {--clear : Clear the terminal screen}
                             {--grep= : Grep specified string}
-                            {--debug : "Display the underlying tail command}';
+                            {--debug : Display the underlying tail command}';
 
     protected $description = 'Tail the latest logfile';
 
@@ -70,7 +71,7 @@ class TailCommand extends Command
             })
             ->execute([
                 "cd {$environmentConfig['log_directory']}",
-                $this->getTailCommand($environmentConfig['log_directory']),
+                $this->getTailCommand(),
             ]);
     }
 
@@ -85,12 +86,25 @@ class TailCommand extends Command
         return $config[$environment];
     }
 
+    public function getTailFile(): string
+    {
+        $environment = $this->argument('environment');
+        $environmentConfig = is_null($environment)
+            ? []
+            : $this->getEnvironmentConfiguration($environment);
+
+        return $this->option('file')
+            ?? $environmentConfig['file']
+            ?? "`ls -t | head -1`";
+    }
+
     public function getTailCommand(): string
     {
         $grep = $this->option('grep')
             ? ' | grep "'.$this->option('grep').'"'
             : '';
+        $file = $this->getTailFile();
 
-        return 'tail -f -n '.$this->option('lines').' "`ls -t | head -1`"'.$grep;
+        return 'tail -f -n '.$this->option('lines').' "'.$file.'"'.$grep;
     }
 }

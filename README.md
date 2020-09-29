@@ -81,6 +81,13 @@ You can start the output with displaying the last lines in the log by using the 
 php artisan tail --lines=50
 ```
 
+By default, the most-recently modified file in the directory will be used.
+You can specify the file that you would like to tail by using the `file` option.
+
+```bash
+php artisan tail --file="other-file.log"
+```
+
 It's also possible to fully clear the output buffer after each log item.
 This can be useful if you're only interested in the last log entry when debugging.
 
@@ -96,7 +103,7 @@ php artisan tail --grep="only display lines that contain this string"
 
 ### Tailing remote logs
 
-To tail remote logs, you must first specify values for `host`, `user` and `log_directory` keys of an environment in the `tail` config file.
+To tail remote logs, you must first specify values for `host`, `user`, `log_directory`, and `file` keys of an environment in the `tail` config file.
 
 After that you can tail that logs of an environment like this
 
@@ -104,7 +111,7 @@ After that you can tail that logs of an environment like this
 php artisan tail production
 ```
 
-You can also use the `--clear` and `--lines` options described above.
+You can also use the `--clear`, `--file`, and `--lines` options described above.
 
 ### Changelog
 
