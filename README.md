@@ -62,6 +62,12 @@ return [
          * The path to the directory that contains your logs.
          */
         'log_directory' => env('TAIL_LOG_DIRECTORY_PRODUCTION', ''),
+
+        /*
+         * The filename of the log file that you want to tail.
+         * Leave null to let the package automatically select the file.
+         */
+        'file' => env('TAIL_LOG_FILE_PRODUCTION', null),
         
     ],
 ];
