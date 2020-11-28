@@ -2,7 +2,11 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
-### 4.3.0 -2020-10-01
+### 4.3.1 - 2020-11-28
+
+- add support for PHP 8
+
+### 4.3.0 - 2020-10-01
 
 - add file option (#63)
 
