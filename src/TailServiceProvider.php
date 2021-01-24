@@ -2,25 +2,16 @@
 
 namespace Spatie\Tail;
 
-use Illuminate\Support\ServiceProvider;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class TailServiceProvider extends ServiceProvider
+class TailServiceProvider extends PackageServiceProvider
 {
-    public function boot()
+    public function configurePackage(Package $package): void
     {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/../config/tail.php' => config_path('tail.php'),
-            ], 'tail-config');
-
-            $this->commands([
-                TailCommand::class,
-            ]);
-        }
-    }
-
-    public function register()
-    {
-        $this->mergeConfigFrom(__DIR__.'/../config/tail.php', 'tail');
+        $package
+            ->name('laravel-tail')
+            ->hasConfigFile()
+            ->hasCommand(TailCommand::class);
     }
 }
