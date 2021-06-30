@@ -21,7 +21,7 @@ class TailCommandTest extends TestCase
             ->artisan('tail', [
                 '--debug' => true,
             ])
-            ->expectsOutput('tail -f -n 0 "`ls -t | head -1`"');
+            ->expectsOutput('\\tail -f -n 0 "`\\ls -t | \\head -1`"');
     }
 
     /** @test */
@@ -32,7 +32,7 @@ class TailCommandTest extends TestCase
                 '--debug' => true,
                 '--file' => 'file.log',
             ])
-            ->expectsOutput('tail -f -n 0 "file.log"');
+            ->expectsOutput('\\tail -f -n 0 "file.log"');
     }
 
     /** @test */
@@ -43,6 +43,6 @@ class TailCommandTest extends TestCase
                 '--debug' => true,
                 '--grep' => 'test',
             ])
-            ->expectsOutput('tail -f -n 0 "`ls -t | head -1`" | grep "test"');
+            ->expectsOutput('\\tail -f -n 0 "`\\ls -t | \\head -1`" | \\grep "test"');
     }
 }
