@@ -49,13 +49,13 @@ class TailCommand extends Command
         $logDirectory = storage_path('logs');
 
         Process::fromShellCommandline($this->getTailCommand(), $logDirectory)
-               ->setTty(true)
-               ->setTimeout(null)
-               ->run(function ($type, $line) {
-                   $this->handleClearOption();
+            ->setTty(true)
+            ->setTimeout(null)
+            ->run(function ($type, $line) {
+                $this->handleClearOption();
 
-                   $this->output->write($line);
-               });
+                $this->output->write($line);
+            });
     }
 
     protected function tailRemotely(string $environment): void
@@ -63,16 +63,16 @@ class TailCommand extends Command
         $environmentConfig = $this->getEnvironmentConfiguration($environment);
 
         Ssh::create($environmentConfig['user'], $environmentConfig['host'])
-           ->configureProcess(fn (Process $process) => $process->setTty(true))
-           ->onOutput(function ($type, $line) {
-               $this->handleClearOption();
+            ->configureProcess(fn (Process $process) => $process->setTty(true))
+            ->onOutput(function ($type, $line) {
+                $this->handleClearOption();
 
-               $this->output->write($line);
-           })
-           ->execute([
-               "cd {$environmentConfig['log_directory']}",
-               $this->getTailCommand(),
-           ]);
+                $this->output->write($line);
+            })
+            ->execute([
+                "cd {$environmentConfig['log_directory']}",
+                $this->getTailCommand(),
+            ]);
     }
 
     protected function getEnvironmentConfiguration(string $environment): array
@@ -94,8 +94,8 @@ class TailCommand extends Command
             : $this->getEnvironmentConfiguration($environment);
 
         return $this->option('file')
-               ?? $environmentConfig['file']
-               ?? "`\\ls -t | \\head -1`";
+            ?? $environmentConfig['file']
+            ?? "`\\ls -t | \\head -1`";
     }
 
     public function getTailCommand(): string
