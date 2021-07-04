@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
+## 4.3.3 - 2021-07-04
+
+- prefix all shell commands with backslashes to ignore aliases (#65)
+
 ## 4.3.2 - 2021-01-25
 
 - use package service provider
