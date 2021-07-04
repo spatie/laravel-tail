@@ -95,16 +95,16 @@ class TailCommand extends Command
 
         return $this->option('file')
             ?? $environmentConfig['file']
-            ?? "`ls -t | head -1`";
+            ?? "`\\ls -t | \\head -1`";
     }
 
     public function getTailCommand(): string
     {
         $grep = $this->option('grep')
-            ? ' | grep "'.$this->option('grep').'"'
+            ? ' | \\grep "'.$this->option('grep').'"'
             : '';
         $file = $this->getTailFile();
 
-        return 'tail -f -n '.$this->option('lines').' "'.$file.'"'.$grep;
+        return '\\tail -f -n '.$this->option('lines').' "'.$file.'"'.$grep;
     }
 }
