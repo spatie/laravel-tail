@@ -22,13 +22,13 @@
         "php" : "^8.0",
         "illuminate/support": "^8.0",
         "illuminate/console": "^8.0",
-        "symfony/process": "^5.0",
+        "symfony/process": "^5.0|^6.0",
         "spatie/ssh": "^1.4",
         "spatie/laravel-package-tools": "^1.9"
     },
     "require-dev": {
         "orchestra/testbench": "^6.0",
-        "phpunit/phpunit": "^9.4",
+        "phpunit/phpunit": "^9.5",
         "mockery/mockery": "^1.4"
 
     },
