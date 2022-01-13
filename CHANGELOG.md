@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
+## 4.4.0 - 2022-01-13
+
+- support Laravel 9
+
 ## 4.3.4 - 2021-12-21
 
 ## What's Changed
