@@ -43,29 +43,45 @@ This is the contents of the file that will be published at `config/tail.php`:
 
 ```php
 return [
-    'production' => [
-        
-        /*
-         * The host that contains your logs.
-         */
-        'host' => env('TAIL_HOST_PRODUCTION', ''),
+    /*
+     * This environment will be used if none is specified
+     * when executing the `tail` command.
+     */
+    'default_environment' => env('TAIL_DEFAULT_ENVIRONMENT', 'local'),
 
-        /*
-         * The user to be used to SSH to the server.
-         */
-        'user' => env('TAIL_USER_PRODUCTION', ''),
+    'environments' => [
 
-        /*
-         * The path to the directory that contains your logs.
-         */
-        'log_directory' => env('TAIL_LOG_DIRECTORY_PRODUCTION', ''),
+        'local' => [
+            /*
+             * The filename of the log file that you want to tail.
+             * Leave null to let the package automatically select the file to tail.
+             */
+            'file' => env('TAIL_LOG_FILE'),
+        ],
 
-        /*
-         * The filename of the log file that you want to tail.
-         * Leave null to let the package automatically select the file.
-         */
-        'file' => env('TAIL_LOG_FILE_PRODUCTION', null),
-        
+        'production' => [
+            /*
+             * The host that contains your logs.
+             */
+            'host' => env('TAIL_HOST_PRODUCTION', ''),
+
+            /*
+             * The user to be used to SSH to the server.
+             */
+            'user' => env('TAIL_USER_PRODUCTION', ''),
+
+            /*
+             * The path to the directory that contains your logs.
+             */
+            'log_directory' => env('TAIL_LOG_DIRECTORY_PRODUCTION', ''),
+
+            /*
+             * The filename of the log file that you want to tail.
+             * Leave null to let the package automatically select the file to tail.
+             */
+            'file' => env('TAIL_LOG_FILE_PRODUCTION'),
+        ],
+
     ],
 ];
 ```
@@ -90,6 +106,8 @@ You can specify the file that you would like to tail by using the `file` option.
 ```bash
 php artisan tail --file="other-file.log"
 ```
+
+Instead of using the `file` option, you could also override the automatic file detection by putting `TAIL_LOG_FILE=laravel.log` into your `.env`.
 
 It's also possible to fully clear the output buffer after each log item.
 This can be useful if you're only interested in the last log entry when debugging.
