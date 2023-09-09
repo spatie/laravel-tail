@@ -9,7 +9,7 @@ use Symfony\Component\Process\Process;
 
 class TailCommand extends Command
 {
-    protected $signature = 'tail {environment?}
+    protected $signature = 'tail {environment=local}
                             {--file= : Name of the log file to tail}
                             {--lines=0 : Output the last number of lines}
                             {--clear : Clear the terminal screen}
@@ -30,7 +30,7 @@ class TailCommand extends Command
 
         $environment = $this->argument('environment');
 
-        is_null($environment)
+        $environment === 'local'
             ? $this->tailLocally()
             : $this->tailRemotely($environment);
     }
@@ -77,21 +77,19 @@ class TailCommand extends Command
 
     protected function getEnvironmentConfiguration(string $environment): array
     {
-        $config = config('tail');
+        $config = config('tail.environments');
 
-        if (! isset($config[$environment])) {
+        if ($environment !== 'local' && ! isset($config[$environment])) {
             throw new Exception("No configuration set for environment `{$environment}`. Make sure this environment is specified in the `tail` config file!");
         }
 
-        return $config[$environment];
+        return $config[$environment] ?? [];
     }
 
     public function getTailFile(): string
     {
         $environment = $this->argument('environment');
-        $environmentConfig = is_null($environment)
-            ? []
-            : $this->getEnvironmentConfiguration($environment);
+        $environmentConfig = $this->getEnvironmentConfiguration($environment);
 
         return $this->option('file')
             ?? $environmentConfig['file']
