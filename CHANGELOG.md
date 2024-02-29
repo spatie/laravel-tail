@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
+## 4.5.0 - 2024-02-29
+
+### What's Changed
+
+* Laravel 11.x Compatibility by @laravel-shift in https://github.com/spatie/laravel-tail/pull/74
+
+**Full Changelog**: https://github.com/spatie/laravel-tail/compare/4.4.2...4.5.0
+
 ## 4.4.2 - 2023-01-25
 
 - support L10
