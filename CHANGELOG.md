@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
+## 4.5.1 - 2025-02-21
+
+### What's Changed
+
+* Laravel 12.x Compatibility by @laravel-shift in https://github.com/spatie/laravel-tail/pull/75
+
+**Full Changelog**: https://github.com/spatie/laravel-tail/compare/4.5.0...4.5.1
+
 ## 4.5.0 - 2024-02-29
 
 ### What's Changed
