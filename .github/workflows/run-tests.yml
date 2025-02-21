@@ -15,7 +15,7 @@ jobs:
       matrix:
         php: [8.4, 8.3, 8.2, 8.1, 8.0]
         laravel: ['8.*', '9.*', '10.*', '11.*', '12.*']
-        dependency-version: [prefer-lowest, prefer-stable]
+        dependency-version: [prefer-stable]
         include:
           - laravel: 10.*
             testbench: ^8.0
