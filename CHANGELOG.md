@@ -2,6 +2,20 @@
 
 All notable changes to `laravel-tail` will be documented in this file
 
+## 4.5.2 - 2025-11-25
+
+### What's Changed
+
+* Update issue template by @AlexVanderbist in https://github.com/spatie/laravel-tail/pull/76
+* Added Symfony 8 support to all symfony/* packages. by @thecaliskan in https://github.com/spatie/laravel-tail/pull/78
+
+### New Contributors
+
+* @AlexVanderbist made their first contribution in https://github.com/spatie/laravel-tail/pull/76
+* @thecaliskan made their first contribution in https://github.com/spatie/laravel-tail/pull/78
+
+**Full Changelog**: https://github.com/spatie/laravel-tail/compare/4.5.1...4.5.2
+
 ## 4.5.1 - 2025-02-21
 
 ### What's Changed
