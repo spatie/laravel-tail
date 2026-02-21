@@ -2,9 +2,11 @@
 
 namespace Spatie\Tail\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
+
 class TailCommandTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_will_throw_an_exception_if_the_given_environment_is_not_configured()
     {
         $this->expectExceptionMessageMatches('/^No configuration set/');
@@ -14,7 +16,7 @@ class TailCommandTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function the_tail_command_is_correct()
     {
         $this
@@ -24,7 +26,7 @@ class TailCommandTest extends TestCase
             ->expectsOutput('\\tail -f -n 0 "`\\ls -t | \\head -1`"');
     }
 
-    /** @test */
+    #[Test]
     public function the_tail_command_with_file_is_correct()
     {
         $this
@@ -35,7 +37,7 @@ class TailCommandTest extends TestCase
             ->expectsOutput('\\tail -f -n 0 "file.log"');
     }
 
-    /** @test */
+    #[Test]
     public function the_command_when_grepping_is_correct()
     {
         $this
